@@ -17,3 +17,9 @@
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl port-forward $POD_NAME 8080:80
 {{- end }}
+2. To setup Matomo you will need to provide the following database information:
+  MySQL host: {{ .Release.Name }}-mysql
+  MySQL user: root
+{{- if .Values.mysql.mysqlRootPassword }}
+  MySQL Root Password: {{ $.Values.mysql.mysqlRootPassword }}
+{{- end }}

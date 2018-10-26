@@ -5,22 +5,22 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  tag: stable
+  repository: matomo
+  tag: 3.5.1-fpm-alpine
   pullPolicy: IfNotPresent
 
 service:
-  type: ClusterIP
+  type: NodePort
   port: 80
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-  path: /
+  #path:
   hosts:
-    - chart-example.local
+    - matomo.local
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
@@ -43,3 +43,14 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+matomoNginx:
+  image:
+    repository: nginx
+    tag: alpine
+    pullPolicy: IfNotPresent
+
+mysql:
+
+  # Creates a specific root password
+  mysqlRootPassword: yourpassword
